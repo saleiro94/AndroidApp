@@ -19,4 +19,10 @@ class NotaRepository(private val NotaDao: NotaDao) {
     suspend fun insert(nota: Nota) {
         NotaDao.insert(nota)
     }
+    suspend fun deleteNota(id: Int){
+        NotaDao.deleteNota(id)
+    }
+    suspend fun updateNota(nota: Nota){
+        NotaDao.updateNota(nota)
+    }
 }

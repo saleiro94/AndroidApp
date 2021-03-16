@@ -20,6 +20,13 @@ class NotaViewModel (private val repository: NotaRepository) : ViewModel() {
     fun insert(nota: Nota) = viewModelScope.launch {
         repository.insert(nota)
     }
+    fun updateNota(nota: Nota) = viewModelScope.launch {
+        repository.updateNota(nota)
+    }
+    fun deleteNota(id: Int) = viewModelScope.launch {
+        repository.deleteNota(id)
+    }
+
 }
 
 class WordViewModelFactory(private val repository: NotaRepository) : ViewModelProvider.Factory {

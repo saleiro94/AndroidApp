@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GiTeste">
-        <activity android:name=".Adicionar_notas"></activity>
+        <activity android:name=".UpdateNota"></activity>
+        <activity android:name=".Adicionar_notas" />
         <activity
             android:name=".Notas"
             android:label="@string/title_activity_notas"

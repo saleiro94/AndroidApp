@@ -26,11 +26,11 @@ public abstract class NotaDB : RoomDatabase() {
                     var wordDao = database.NotaDao()
 
                     // Delete all content here.
-                    wordDao.deleteAll()
+                   // wordDao.deleteAll()
 
                     // Add sample words.
-                    var word = Nota(1,"asd","teste")
-                    wordDao.insert(word)
+                    //var word = Nota(1,"asd","teste")
+                    //wordDao.insert(word)
 
                 }
             }

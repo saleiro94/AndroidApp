@@ -5,11 +5,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 
-class Adicionar_notas : AppCompatActivity() {
-
+class UpdateNota : AppCompatActivity() {
     private lateinit var editruaView: EditText
     private lateinit var editproblemaView: EditText
 
@@ -18,6 +18,7 @@ class Adicionar_notas : AppCompatActivity() {
         setContentView(R.layout.adicionar_notas)
         editruaView = findViewById(R.id.edit_rua)
         editproblemaView = findViewById(R.id.edit_problema)
+        var ss: String = intent.getStringExtra("id").toString()
 
         val button = findViewById<Button>(R.id.button_save)
         button.setOnClickListener {
@@ -28,7 +29,8 @@ class Adicionar_notas : AppCompatActivity() {
                 val rua= editruaView.text.toString()
                 val problema = editproblemaView.text.toString()
 
-                replyIntent.putExtra(EXTRA_REPLY, "$rua "+" ] "+" $problema")
+                Log.d("Valor", ss)
+                replyIntent.putExtra(EXTRA_REPLY, "$rua "+" ] "+" $problema"+" [ "+" $ss")
                 setResult(Activity.RESULT_OK, replyIntent)
             }
             finish()
@@ -39,6 +41,3 @@ class Adicionar_notas : AppCompatActivity() {
         const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
     }
 }
-
-
-

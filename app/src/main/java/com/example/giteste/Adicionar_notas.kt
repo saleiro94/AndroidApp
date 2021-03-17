@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
+import com.example.giteste.entity.Nota
 
 class Adicionar_notas : AppCompatActivity() {
 
@@ -18,7 +19,7 @@ class Adicionar_notas : AppCompatActivity() {
         setContentView(R.layout.adicionar_notas)
         editruaView = findViewById(R.id.edit_rua)
         editproblemaView = findViewById(R.id.edit_problema)
-
+        var id: Int =intent.getIntExtra("ID",0)
         val button = findViewById<Button>(R.id.button_save)
         button.setOnClickListener {
             val replyIntent = Intent()
@@ -28,7 +29,9 @@ class Adicionar_notas : AppCompatActivity() {
                 val rua= editruaView.text.toString()
                 val problema = editproblemaView.text.toString()
 
-                replyIntent.putExtra(EXTRA_REPLY, "$rua "+" ] "+" $problema")
+                replyIntent.putExtra(RUA, rua)
+                replyIntent.putExtra(PROBLEMA, problema)
+                replyIntent.putExtra(ID, id)
                 setResult(Activity.RESULT_OK, replyIntent)
             }
             finish()
@@ -36,7 +39,9 @@ class Adicionar_notas : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
+        const val RUA= "com.example.android.wordlistsql.RUA"
+        const val PROBLEMA = "com.example.android.wordlistsql.PROBLEMA"
+        const val ID = "com.example.android.wordlistsql.ID"
     }
 }
 

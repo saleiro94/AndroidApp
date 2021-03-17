@@ -52,7 +52,9 @@ class Notas : AppCompatActivity() {
         adapter.setOnItemClick(object : NotaAdapter.onItemclick {
             override fun onEditClick(position: Int){
 
-
+                val intent = Intent(this@Notas,Adicionar_notas::class.java)
+                intent.putExtra("ID",position)
+                startActivityForResult(intent,2)
             }
 
             override fun onDeleteClick(position: Int){
@@ -65,18 +67,27 @@ class Notas : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
         super.onActivityResult(requestCode, resultCode, intentData)
 
+        if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
+          val rua = intentData?.getStringExtra(Adicionar_notas.RUA)
+            val problema= intentData?.getStringExtra(Adicionar_notas.PROBLEMA)
+            val id = intentData?.getIntExtra(Adicionar_notas.ID,0)
+            if(rua != null && problema != null && id != null) {
+
+         val nota =  Nota(id, rua, problema)
+                NotaViewModel.updateNota(nota)
+
+            }
+            }
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            intentData?.getStringExtra(Adicionar_notas.EXTRA_REPLY)?.let { reply ->
+            val rua = intentData?.getStringExtra(Adicionar_notas.RUA)
+            val problema= intentData?.getStringExtra(Adicionar_notas.PROBLEMA)
+             if(rua != null && problema != null) {
+                 val nota = Nota(id = null, rua, problema)
 
-                val word =Nota(id = null, reply.toString().substringBefore("]"), reply.toString().substringAfter("]"))
-                Log.d("Valor", word.id.toString())
 
-                NotaViewModel.insert(word)
-                Toast.makeText(
-                        applicationContext,
-                        word.toString(),
-                        Toast.LENGTH_LONG
-                ).show()
+                 NotaViewModel.insert(nota)
+
+
             }
         } else {
             Toast.makeText(

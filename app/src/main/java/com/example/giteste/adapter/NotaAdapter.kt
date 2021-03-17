@@ -79,8 +79,8 @@ class NotaAdapter : ListAdapter<Nota, NotaAdapter.WordViewHolder>(WordsComparato
 
             upadateItemView.setOnClickListener { v: View ->
                 val position = adapterPosition
-                if(position != RecyclerView.NO_POSITION){
-                    onItemclick.onDeleteClick(position)
+                if(position != RecyclerView.NO_POSITION && idItem != null){
+                    onItemclick.onEditClick(idItem!!)
                 }
                 Toast.makeText(
                         v.context,

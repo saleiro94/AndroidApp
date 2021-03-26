@@ -14,4 +14,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="rua">Rua</string>
     <string name="problema">Problema</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="nome_da_rua">Nome da rua</string>
+    <string name="problema_da_rua">Problema da rua</string>
 </resources>

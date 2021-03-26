@@ -27,7 +27,7 @@ class NotaAdapter : ListAdapter<Nota, NotaAdapter.WordViewHolder>(WordsComparato
     }
 
     interface onItemclick{
-     fun onEditClick(position: Int)
+     fun onEditClick(position: Int,rua: String ,problema: String)
 
      fun onDeleteClick(position: Int)
  }
@@ -40,15 +40,7 @@ class NotaAdapter : ListAdapter<Nota, NotaAdapter.WordViewHolder>(WordsComparato
         val current = getItem(position)
 
         holder.bind(current.rua, current.problema,current.id)
-       //older.deleteItemView.setOnClickListener {
-       //
-       //
-       // val intent = Intent(it.getContext(), Notas::class.java)
-       //   val id = current.id
-       //   intent.putExtra("id", id.toString())
-       //   it.getContext().startActivity(intent)
-       //
-       //
+
 
 
     }
@@ -70,23 +62,16 @@ class NotaAdapter : ListAdapter<Nota, NotaAdapter.WordViewHolder>(WordsComparato
 
                     onItemclick.onDeleteClick(idItem!!)
                 }
-                Toast.makeText(
-                       v.context,
-                        " deele",
-                        Toast.LENGTH_LONG
-                ).show()
+
             }
 
             upadateItemView.setOnClickListener { v: View ->
                 val position = adapterPosition
+
                 if(position != RecyclerView.NO_POSITION && idItem != null){
-                    onItemclick.onEditClick(idItem!!)
+                    onItemclick.onEditClick(idItem!!,ruaItemView.text.toString(),problemItemView.text.toString())
                 }
-                Toast.makeText(
-                        v.context,
-                        " update",
-                        Toast.LENGTH_LONG
-                ).show()
+
             }
 
         }

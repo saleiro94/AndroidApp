@@ -50,10 +50,13 @@ class Notas : AppCompatActivity() {
 
         }
         adapter.setOnItemClick(object : NotaAdapter.onItemclick {
-            override fun onEditClick(position: Int){
+            override fun onEditClick(position: Int ,rua: String, problema: String){
 
                 val intent = Intent(this@Notas,Adicionar_notas::class.java)
                 intent.putExtra("ID",position)
+                intent.putExtra("Rua",rua)
+                intent.putExtra("Problema",problema)
+
                 startActivityForResult(intent,2)
             }
 
@@ -77,7 +80,9 @@ class Notas : AppCompatActivity() {
                 NotaViewModel.updateNota(nota)
 
             }
-            }
+            }else if(requestCode == 2){
+            Toast.makeText(this, "Erro: Campos Vazios", Toast.LENGTH_SHORT).show()
+        }
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
             val rua = intentData?.getStringExtra(Adicionar_notas.RUA)
             val problema= intentData?.getStringExtra(Adicionar_notas.PROBLEMA)
@@ -89,12 +94,8 @@ class Notas : AppCompatActivity() {
 
 
             }
-        } else {
-            Toast.makeText(
-                    applicationContext,
-                    " word.toString",
-                    Toast.LENGTH_LONG
-            ).show()
+        }else if(requestCode == 1){
+            Toast.makeText(this, "Erro: Campos Vazios", Toast.LENGTH_SHORT).show()
         }
     }
 

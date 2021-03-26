@@ -20,6 +20,11 @@ class Adicionar_notas : AppCompatActivity() {
         editruaView = findViewById(R.id.edit_rua)
         editproblemaView = findViewById(R.id.edit_problema)
         var id: Int =intent.getIntExtra("ID",0)
+
+        val editRua = intent.getStringExtra("Rua")
+        val editProblema = intent.getStringExtra("Problema")
+        findViewById<EditText>(R.id.edit_rua).setText(editRua)
+        findViewById<EditText>(R.id.edit_problema).setText(editProblema)
         val button = findViewById<Button>(R.id.button_save)
         button.setOnClickListener {
             val replyIntent = Intent()

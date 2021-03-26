@@ -8,7 +8,6 @@
 
     <ImageButton
         android:id="@+id/delete"
-
         android:layout_width="52dp"
         android:layout_height="37dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,7 +18,6 @@
 
     <ImageButton
         android:id="@+id/update"
-
         android:layout_width="44dp"
         android:layout_height="36dp"
         android:layout_marginEnd="80dp"
@@ -29,16 +27,39 @@
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
     <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:shadowColor="#A83535"
+        android:text="Problema :"
+        android:textColor="@color/design_default_color_error"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:textColor="@color/purple_700"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Rua :"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
         android:id="@+id/rua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rua"
+
         app:layout_constraintBottom_toTopOf="@+id/problema"
         app:layout_constraintEnd_toStartOf="@+id/update"
-        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintHorizontal_bias="0.456"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.64" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/problema"
@@ -47,7 +68,7 @@
         android:text="@string/problema"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />

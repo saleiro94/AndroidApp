@@ -20,4 +20,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    fun blogin(view: View){
+        val button = findViewById<Button>(R.id.login)
+        button.setOnClickListener{
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+        }
+    }
 }

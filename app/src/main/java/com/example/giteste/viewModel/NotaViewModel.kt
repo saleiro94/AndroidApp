@@ -38,3 +38,4 @@ class WordViewModelFactory(private val repository: NotaRepository) : ViewModelPr
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+//teste

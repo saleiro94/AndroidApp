@@ -1,6 +1,8 @@
 package com.example.giteste
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -21,7 +23,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun blogin(view: View){
-        val button = findViewById<Button>(R.id.login)
+        val button = findViewById<Button>(R.id.blogin)
+
         button.setOnClickListener{
             val intent = Intent(this, Login::class.java)
             startActivity(intent)

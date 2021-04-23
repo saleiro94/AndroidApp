@@ -1,4 +1,8 @@
 package com.example.giteste.api
 
-class OutputPost {
-}
+data class OutputPost (
+    val id: Int,
+    val nome: String,
+    val password:String ,
+
+)

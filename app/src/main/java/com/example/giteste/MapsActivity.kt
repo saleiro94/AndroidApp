@@ -1,8 +1,11 @@
 package com.example.giteste
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,9 +25,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_maps)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-                .findFragmentById(R.id.map) as SupportMapFragment
+                .findFragmentById(R.id.frg) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        val fab = findViewById<FloatingActionButton>(R.id.floatingActionButton)
+        fab.setOnClickListener {
+
+            val sharedPref: SharedPreferences = getSharedPreferences(
+                    getString(R.string.preference_login), Context.MODE_PRIVATE
+            )
+            with(sharedPref.edit()){
+                putBoolean(getString(R.string.LoginShared), false)
+
+                commit()
+
+            }
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
@@ -44,6 +62,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-        Toast.makeText(this@MapsActivity, R.string.loginDone, Toast.LENGTH_SHORT).show()
+       // Toast.makeText(this@MapsActivity, R.string.loginDone, Toast.LENGTH_SHORT).show()
+        if(R.string.loginDone == 2){
+            Toast.makeText(this@MapsActivity,"consegui ler", Toast.LENGTH_SHORT).show()
+        }
     }
 }

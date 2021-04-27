@@ -31,7 +31,6 @@ class Login : AppCompatActivity() {
             if(sharedPref.all[getString(R.string.LoginShared)]== true){
                 var intent = Intent(this, MapsActivity::class.java)
                 startActivity(intent)
-
             }
         }
 
@@ -42,17 +41,14 @@ class Login : AppCompatActivity() {
 
             val button = findViewById<Button>(R.id.login)
             button.setOnClickListener{
-                Log.d("teste","esntrou")
                 val request = ServiceBuilder.buildService(EndPoints::class.java)
               val call = request.postLogin(username.text.toString(), password.text.toString())
 
                 call.enqueue(object : Callback<OutputPost> {
                     override fun onResponse(call: Call<OutputPost>, response: Response<OutputPost>) {
-                        Log.d("certu",response.toString())
+
                         if (response.isSuccessful) {
                             val c: OutputPost = response.body()!!
-                            Log.d("certu",c.toString())
-
 
                             //Shared Preferences Login
                             val sharedPref: SharedPreferences = getSharedPreferences(
@@ -64,13 +60,16 @@ class Login : AppCompatActivity() {
                                 commit()
                                 Log.d("**SHARED","${c.id}" )
                             }
-                            Toast.makeText(this@Login, R.string.loginDone, Toast.LENGTH_SHORT).show()
+
+                            if(R.string.loginDone == 2){
+                                Toast.makeText(this@Login,"consegui ler", Toast.LENGTH_SHORT).show()
+                            }
+                            //Toast.makeText(this@Login,R.string.LoginShared, Toast.LENGTH_SHORT).show()
                             startActivity(intent)
                         }
                     }
 
                     override fun onFailure(call: Call<OutputPost>, t: Throwable) {
-Log.d("erru",t.toString())
                         Toast.makeText(this@Login, "FAil", Toast.LENGTH_SHORT).show()
                     }
 

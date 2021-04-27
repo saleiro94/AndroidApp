@@ -1,4 +1,5 @@
 package com.example.giteste.api
 
-class Pontos {
-}
+data class Pontos (
+        val id: Int,
+)

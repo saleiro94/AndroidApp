@@ -63,8 +63,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
        // Toast.makeText(this@MapsActivity, R.string.loginDone, Toast.LENGTH_SHORT).show()
-        if(R.string.loginDone == 2){
-            Toast.makeText(this@MapsActivity,"consegui ler", Toast.LENGTH_SHORT).show()
-        }
+
     }
 }
+

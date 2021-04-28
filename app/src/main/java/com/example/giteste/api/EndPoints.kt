@@ -10,5 +10,6 @@ interface EndPoints {
     @FormUrlEncoded
     @POST("/myslim/login")
     fun postLogin(@Field("nome") nome :String,@Field("password") password: String): Call<OutputPost>
-
+    @GET("/myslim/ponto")
+    fun getPontos():Call<List<Pontos>>
 }

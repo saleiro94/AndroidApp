@@ -1,22 +1,18 @@
 package com.example.giteste
 
+
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
-
-
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.giteste.api.EndPoints
 import com.example.giteste.api.OutputPost
 import com.example.giteste.api.ServiceBuilder
-import com.example.giteste.api.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,20 +53,21 @@ class Login : AppCompatActivity() {
                             val sharedPref: SharedPreferences = getSharedPreferences(
                                     getString(R.string.preference_login), Context.MODE_PRIVATE
                             )
-                            with(sharedPref.edit()){
+                            with(sharedPref.edit()) {
                                 putBoolean(getString(R.string.LoginShared), true)
                                 putString(getString(R.string.loginDone), c.id.toString())
                                 commit()
-                                Log.d("**SHARED","${c.id}" )
+                                Log.d("**SHARED", "${c.id}")
                             }
 
-                            if(R.string.loginDone == 2){
-                                Toast.makeText(this@Login,"consegui ler", Toast.LENGTH_SHORT).show()
+                            if (R.string.loginDone == 2) {
+                                Toast.makeText(this@Login, "consegui ler", Toast.LENGTH_SHORT).show()
                             }
                             //Toast.makeText(this@Login,R.string.LoginShared, Toast.LENGTH_SHORT).show()
+                            //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                             startActivity(intent)
 
-                            finishAffinity()
+                            finish()
                         }
                     }
 

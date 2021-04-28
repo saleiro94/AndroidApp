@@ -77,7 +77,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 getString(R.string.preference_login), Context.MODE_PRIVATE
         )
         var posicao :LatLng
-
+//asd
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))

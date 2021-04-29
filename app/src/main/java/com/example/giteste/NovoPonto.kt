@@ -26,6 +26,8 @@ import retrofit2.Response
 class NovoPonto : AppCompatActivity(){
 
 
+    private lateinit var pontoproblema: EditText
+    private lateinit var tipoproblema: EditText
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback : LocationCallback
     private lateinit var locationRequest : LocationRequest
@@ -55,14 +57,17 @@ class NovoPonto : AppCompatActivity(){
 
 
 
-        val pontoproblema = findViewById<EditText>(R.id.pontoproblema)
+       pontoproblema = findViewById<EditText>(R.id.pontoproblema)
+        tipoproblema = findViewById<EditText>(R.id.tipoproblema)
 
         val id_Users = sharedPref.all[getString(R.string.loginDone)].toString()
 
-        val button = findViewById<Button>(R.id.login)
+
+        val button = findViewById<Button>(R.id.Novoponto)
         button.setOnClickListener{
             val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.postNovoPonto(id = 0,pontoproblema.toString(),lastLocation.latitude,lastLocation.longitude,id_Users.toInt())
+            Log.d("dados", pontoproblema.text.toString() +lastLocation.latitude.toString()+lastLocation.longitude.toString()+"----"+ id_Users+"----"+tipoproblema.text.toString().toInt())
+            val call = request.postNovoPonto(pontoproblema.text.toString(),lastLocation.latitude,lastLocation.longitude,id_Users.toInt(),tipoproblema.text.toString().toInt())
 
             call.enqueue(object : Callback<Pontos> {
                 override fun onResponse(call: Call<Pontos>, response: Response<Pontos>) {
@@ -70,21 +75,15 @@ class NovoPonto : AppCompatActivity(){
                     if (response.isSuccessful) {
                         val c: Pontos = response.body()!!
 
-                        //Shared Preferences Login
-
-                        if (R.string.loginDone == 2) {
-                            Toast.makeText(this@NovoPonto, "consegui ler", Toast.LENGTH_SHORT).show()
-                        }
-                        //Toast.makeText(this@Login,R.string.LoginShared, Toast.LENGTH_SHORT).show()
-                        //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        val intent = Intent(this@NovoPonto, MapsActivity::class.java)
                         startActivity(intent)
-
-                        finish()
                     }
                 }
 
                 override fun onFailure(call: Call<Pontos>, t: Throwable) {
                     Toast.makeText(this@NovoPonto, "FAil", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@NovoPonto, MapsActivity::class.java)
+                    startActivity(intent)
                 }
 
             })

@@ -14,5 +14,5 @@ interface EndPoints {
     fun getPontos():Call<List<Pontos>>
     @FormUrlEncoded
     @POST("/myslim/novoponto")
-    fun postNovoPonto(@Field("id") id :Int,@Field("problema") problema: String,@Field("lat") lat: Double,@Field("lng") lng: Double,@Field("id_Users") id_Users: Int): Call<Pontos>
+    fun postNovoPonto(@Field("problema") problema: String,@Field("lat") lat: Double,@Field("lng") lng: Double,@Field("id_Users") id_Users: Int,@Field("id_Tipo") id_Tipo: Int): Call<Pontos>
 }

@@ -6,4 +6,5 @@ data class Pontos (
         val lat : Double,
         val lng: Double,
         val id_Users: Int,
+        val id_Tipo: Int,
 )

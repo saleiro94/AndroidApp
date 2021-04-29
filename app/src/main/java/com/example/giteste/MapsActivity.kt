@@ -54,7 +54,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+        val fabponto = findViewById<FloatingActionButton>(R.id.floatingAction)
+        fabponto.setOnClickListener {
 
+            val intent = Intent(this, NovoPonto::class.java)
+            startActivity(intent)
+        }
 
 
 

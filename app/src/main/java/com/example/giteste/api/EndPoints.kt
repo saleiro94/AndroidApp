@@ -12,4 +12,7 @@ interface EndPoints {
     fun postLogin(@Field("nome") nome :String,@Field("password") password: String): Call<OutputPost>
     @GET("/myslim/ponto")
     fun getPontos():Call<List<Pontos>>
+    @FormUrlEncoded
+    @POST("/myslim/novoponto")
+    fun postNovoPonto(@Field("id") id :Int,@Field("problema") problema: String,@Field("lat") lat: Double,@Field("lng") lng: Double,@Field("id_Users") id_Users: Int): Call<Pontos>
 }

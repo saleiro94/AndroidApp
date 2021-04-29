@@ -30,4 +30,6 @@
     <string name="preference_login">file1</string>
     <string name="loginDone">loginDone</string>
     <string name="LoginShared">bool</string>
+    <string name="AdicionarPonto">Adicionar Ponto</string>
+    <string name="Problema">Problema</string>
 </resources>

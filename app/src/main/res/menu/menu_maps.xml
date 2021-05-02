@@ -4,15 +4,15 @@
 
     <item
         android:id="@+id/action_acidentes"
-        android:title="Acidentes" />
+        android:title="@string/acidentes" />
     <item   android:id="@+id/action_obras"
-        android:title="Obras" />
+        android:title="@string/obras" />
     <item
         android:id="@+id/action_1000"
-        android:title="1000 metros"
+        android:title="@string/_1000_metros"
          />
     <item
         android:id="@+id/action_500"
-        android:title="500 metros"
+        android:title="@string/_500_metros"
         />
 </menu>

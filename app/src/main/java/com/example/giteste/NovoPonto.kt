@@ -76,7 +76,7 @@ class NovoPonto : AppCompatActivity(){
         val button = findViewById<Button>(R.id.Novoponto)
         button.setOnClickListener {
             if (TextUtils.isEmpty(pontoproblema.text) || tipo == 0) {
-                Toast.makeText(this@NovoPonto, "Algum dos Campos encontram-se vazios", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@NovoPonto, getString(R.string.Campos_vazios), Toast.LENGTH_SHORT).show()
             } else {
                 val request = ServiceBuilder.buildService(EndPoints::class.java)
                 Log.d("dados", pontoproblema.text.toString() + lastLocation.latitude.toString() + lastLocation.longitude.toString() + "----" + id_Users + "----" + tipo)
@@ -94,7 +94,7 @@ class NovoPonto : AppCompatActivity(){
                     }
 
                     override fun onFailure(call: Call<Pontos>, t: Throwable) {
-                        Toast.makeText(this@NovoPonto, "FAil", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@NovoPonto, getString(R.string.fail), Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@NovoPonto, MapsActivity::class.java)
                         startActivity(intent)
                     }

@@ -53,7 +53,8 @@ class deleteUpdate : AppCompatActivity() {
         val buttondelete = findViewById<Button>(R.id.DeletePonto)
 
         buttondelete.setOnClickListener{
-            if(id_user == (sharedPref.all[getString(R.string.loginDone)])) {
+            Log.d("ads", id_user.toString() + (sharedPref.all[getString(R.string.loginDone)]))
+            if(id_user.toString() == (sharedPref.all[getString(R.string.loginDone)])) {
                 val request = ServiceBuilder.buildService(EndPoints::class.java)
                 Log.d("ads", id.toString())
                 val call = request.delete(id)
@@ -70,20 +71,20 @@ class deleteUpdate : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<Pontos>, t: Throwable) {
-                        Toast.makeText(this@deleteUpdate, "FAil", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@deleteUpdate, getString(R.string.fail), Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@deleteUpdate, MapsActivity::class.java)
                         startActivity(intent)
                     }
 
                 })
             } else{
-                Toast.makeText(this@deleteUpdate, "Não possui premissões para esta operação", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@deleteUpdate, getString(R.string.permissoes), Toast.LENGTH_SHORT).show()
             }
         }
         val buttonupdate = findViewById<Button>(R.id.UpdatePonto)
 
         buttonupdate.setOnClickListener{
-            if(id_user == (sharedPref.all[getString(R.string.loginDone)])) {
+            if(id_user.toString() == (sharedPref.all[getString(R.string.loginDone)])) {
                 val request = ServiceBuilder.buildService(EndPoints::class.java)
                 Log.d("ads", "ad")
                 val call = request.update(id, editponto.text.toString(), 2)
@@ -100,14 +101,14 @@ class deleteUpdate : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<Pontos>, t: Throwable) {
-                        Toast.makeText(this@deleteUpdate, "FAil", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@deleteUpdate, getString(R.string.fail), Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@deleteUpdate, MapsActivity::class.java)
                         startActivity(intent)
                     }
 
                 })
             }else{
-                Toast.makeText(this@deleteUpdate, "Não possui premissões para esta operação", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@deleteUpdate, getString(R.string.permissoes), Toast.LENGTH_SHORT).show()
             }
         }
     }

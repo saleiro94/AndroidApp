@@ -81,7 +81,7 @@ class Notas : AppCompatActivity() {
 
             }
             }else if(requestCode == 2){
-            Toast.makeText(this, "Erro: Campos Vazios", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.Campos_vazios), Toast.LENGTH_SHORT).show()
         }
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
             val rua = intentData?.getStringExtra(Adicionar_notas.RUA)

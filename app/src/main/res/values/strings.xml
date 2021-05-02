@@ -27,9 +27,22 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_maps">Map</string>
-    <string name="preference_login">file1</string>
-    <string name="loginDone">loginDone</string>
-    <string name="LoginShared">bool</string>
+    <string name="preference_login" translatable="false">file1</string>
+    <string name="loginDone" translatable="false">loginDone</string>
+    <string name="LoginShared" translatable="false">bool</string>
     <string name="AdicionarPonto">Adicionar Ponto</string>
     <string name="Problema">Problema</string>
+    <string name="acidente">Acidente</string>
+    <string name="obras">Obras</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="obras">Obras</string>
+    <string name="acidentes">Acidentes</string>
+    <string name="acidentes">Acidentes</string>
+    <string name="obras">Obras</string>
+    <string name="_1000_metros">1000 metros</string>
+    <string name="_500_metros">500 metros</string>
+    <string name="fail">FAIL</string>
+    <string name="permissoes">Não possui premissões para esta operação</string>
+    <string name="Campos_vazios">Algum dos Campos encontram-se vazios</string>
 </resources>

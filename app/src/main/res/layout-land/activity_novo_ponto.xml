@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.337" />
+        app:layout_constraintVertical_bias="0.223" />
 
     <Button
         android:id="@+id/Novoponto"
@@ -26,28 +26,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.737" />
+        app:layout_constraintVertical_bias="0.911" />
 
     <RadioGroup
-        android:layout_width="134dp"
-        android:layout_height="251dp"
+        android:layout_width="125dp"
+        android:layout_height="170dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
+            android:id="@+id/AcidenteN"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:text="@string/acidentes" />
+
+        <RadioButton
             android:id="@+id/obrasN"
             android:layout_width="match_parent"
             android:layout_height="67dp"
-            android:layout_marginBottom="104dp"
             android:text="@string/obras" />
-
-        <RadioButton
-            android:id="@+id/AcidenteN"
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
-            android:text="@string/acidentes" />
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

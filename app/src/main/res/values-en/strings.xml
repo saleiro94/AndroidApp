@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GiTeste</string>
+    <string name="Login">Login</string>
+    <string name="Notas">Notes</string>
+    <string name="GeoFence">Geofence</string>
+    <string name="title_activity_notas">Notes</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment">Previous</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="rua">Street</string>
+    <string name="problema">Problem</string>
+    <string name="nome_da_rua">Street name</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_nome">Name</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">Welcome !</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">Login failed</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="AdicionarPonto">New Point</string>
+    <string name="Problema">Problem</string>
+    <string name="confirmar">Confirm</string>
+    <string name="problema_da_rua">Street problem</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="fail">FAIL</string>
+    <string name="acidente">accident</string>
+    <string name="acidentes">accidents</string>
+    <string name="_1000_metros">1000 meters</string>
+    <string name="_500_metros">500 meters</string>
+    <string name="permissoes">There are no permission for this operation</string>
+    <string name="Campos_vazios">Some fields are empty</string>
+    <string name="obras">road construction</string>
+</resources>

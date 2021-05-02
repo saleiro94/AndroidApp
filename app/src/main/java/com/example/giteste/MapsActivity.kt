@@ -189,7 +189,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(posicao))
                 }
-                Toast.makeText(applicationContext, "click on setting", Toast.LENGTH_LONG).show()
+
                 return true
             }
             R.id.action_obras -> {
@@ -213,7 +213,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(posicao))
                 }
-                Toast.makeText(applicationContext, "click on share", Toast.LENGTH_LONG).show()
+
                 return true
             }
             R.id.action_500 -> {

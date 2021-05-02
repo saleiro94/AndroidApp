@@ -8,8 +8,11 @@
     <item   android:id="@+id/action_obras"
         android:title="Obras" />
     <item
-        android:id="@+id/app_bar_search"
-        android:icon="@drawable/ic_search_black_24dp"
-        android:title="Search"
-        app:actionViewClass="android.widget.SearchView" />
+        android:id="@+id/action_1000"
+        android:title="1000 metros"
+         />
+    <item
+        android:id="@+id/action_500"
+        android:title="500 metros"
+        />
 </menu>

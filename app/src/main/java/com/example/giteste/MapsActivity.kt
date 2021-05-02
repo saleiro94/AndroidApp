@@ -3,22 +3,25 @@ package com.example.giteste
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.example.giteste.api.EndPoints
 import com.example.giteste.api.Pontos
 import com.example.giteste.api.ServiceBuilder
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
@@ -30,6 +33,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var pontos: List<Pontos>
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationCallback : LocationCallback
+    private lateinit var locationRequest : LocationRequest
+    private lateinit var lastLocation : Location
+    private val LOCATION_PERMISSION_REQUEST_CODE = 2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
@@ -38,7 +47,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 .findFragmentById(R.id.frg) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        locationCallback = object : LocationCallback(){
+            override fun onLocationResult(p0: LocationResult) {
+                super.onLocationResult(p0)
+                lastLocation = p0.lastLocation
+                var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
+                Log.d("pontos", "coordenadas" + loc.latitude + "- " + loc.longitude)
+            }
+        }
+        createLocationRequest()
 
 
 
@@ -103,7 +122,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             mMap.addMarker(MarkerOptions()
                                     .position(posicao)
                                     .title(ponto.problema)
-                                    .snippet("${ponto.id}"+"_"+ "${ponto.problema}" +"_"+ "${ponto.lat}"+"_"+ "${ponto.lng}"+"_"+ "${ponto.id_Users}"+"_"+ "${ponto.id_Tipo}"+"_"+"${ponto.id_Users}")
+                                    .snippet("${ponto.id}" + "_" + "${ponto.problema}" + "_" + "${ponto.lat}" + "_" + "${ponto.lng}" + "_" + "${ponto.id_Users}" + "_" + "${ponto.id_Tipo}" + "_" + "${ponto.id_Users}")
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
 
                             )
@@ -112,7 +131,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                     MarkerOptions()
                                             .position(posicao)
                                             .title(ponto.problema)
-                                            .snippet("${ponto.id}"+"_"+ "${ponto.problema}" +"_"+ "${ponto.lat}"+"_"+ "${ponto.lng}"+"_"+ "${ponto.id_Users}"+"_"+ "${ponto.id_Tipo}"+"_"+"${ponto.id_Users}")
+                                            .snippet("${ponto.id}" + "_" + "${ponto.problema}" + "_" + "${ponto.lat}" + "_" + "${ponto.lng}" + "_" + "${ponto.id_Users}" + "_" + "${ponto.id_Tipo}" + "_" + "${ponto.id_Users}")
                                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
 
                             )
@@ -152,31 +171,31 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             R.id.action_acidentes -> {
                 mMap.clear()
 
-                var posicao :LatLng
-                    Log.d("ponto", pontos.toString())
-                    for (ponto in pontos) {
-                        posicao = LatLng(ponto.lat, ponto.lng)
-                        Log.d("ponto", "${posicao}" + "${ponto.id_Users}")
+                var posicao: LatLng
+                Log.d("ponto", pontos.toString())
+                for (ponto in pontos) {
+                    posicao = LatLng(ponto.lat, ponto.lng)
+                    Log.d("ponto", "${posicao}" + "${ponto.id_Users}")
 
-                        if (ponto.id_Tipo == 2) {
+                    if (ponto.id_Tipo == 2) {
 
-                            mMap.addMarker(MarkerOptions()
-                                    .position(posicao)
-                                    .title(ponto.problema)
-                                    .snippet("${ponto.id}"+"_"+ "${ponto.problema}" +"_"+ "${ponto.lat}"+"_"+ "${ponto.lng}"+"_"+ "${ponto.id_Users}"+"_"+ "${ponto.id_Tipo}"+"_"+"${ponto.id_Users}")
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                        mMap.addMarker(MarkerOptions()
+                                .position(posicao)
+                                .title(ponto.problema)
+                                .snippet("${ponto.id}" + "_" + "${ponto.problema}" + "_" + "${ponto.lat}" + "_" + "${ponto.lng}" + "_" + "${ponto.id_Users}" + "_" + "${ponto.id_Tipo}" + "_" + "${ponto.id_Users}")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
 
-                            )
-                        }
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(posicao))
+                        )
                     }
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(posicao))
+                }
                 Toast.makeText(applicationContext, "click on setting", Toast.LENGTH_LONG).show()
                 return true
             }
-            R.id.action_obras->{
+            R.id.action_obras -> {
                 mMap.clear()
 
-                var posicao :LatLng
+                var posicao: LatLng
                 Log.d("ponto", pontos.toString())
                 for (ponto in pontos) {
                     posicao = LatLng(ponto.lat, ponto.lng)
@@ -187,7 +206,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         mMap.addMarker(MarkerOptions()
                                 .position(posicao)
                                 .title(ponto.problema)
-                                .snippet("${ponto.id}"+"_"+ "${ponto.problema}" +"_"+ "${ponto.lat}"+"_"+ "${ponto.lng}"+"_"+ "${ponto.id_Users}"+"_"+ "${ponto.id_Tipo}"+"_"+"${ponto.id_Users}")
+                                .snippet("${ponto.id}" + "_" + "${ponto.problema}" + "_" + "${ponto.lat}" + "_" + "${ponto.lng}" + "_" + "${ponto.id_Users}" + "_" + "${ponto.id_Tipo}" + "_" + "${ponto.id_Users}")
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
 
                         )
@@ -197,13 +216,98 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(applicationContext, "click on share", Toast.LENGTH_LONG).show()
                 return true
             }
-            R.id.app_bar_search ->{
-                Toast.makeText(applicationContext, "click on exit", Toast.LENGTH_LONG).show()
+            R.id.action_500 -> {
+                val startPoint = Location("locationA")
+                startPoint.setLatitude(lastLocation.latitude)
+                startPoint.setLongitude(lastLocation.longitude)
+                mMap.clear()
+
+                var posicao: LatLng
+                Log.d("ponto", pontos.toString())
+                for (ponto in pontos) {
+                    posicao = LatLng(ponto.lat, ponto.lng)
+                    Log.d("ponto", "${posicao}" + "${ponto.id_Users}")
+                    val endPoint = Location("locationA")
+                    endPoint.setLatitude(ponto.lat)
+                    endPoint.setLongitude(ponto.lng)
+                    if (startPoint.distanceTo(endPoint) < 500) {
+
+                        mMap.addMarker(MarkerOptions()
+                                .position(posicao)
+                                .title(ponto.problema)
+                                .snippet("${ponto.id}" + "_" + "${ponto.problema}" + "_" + "${ponto.lat}" + "_" + "${ponto.lng}" + "_" + "${ponto.id_Users}" + "_" + "${ponto.id_Tipo}" + "_" + "${ponto.id_Users}")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+
+                        )
+                    }
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(posicao))
+                }
+                return true
+            }
+            R.id.action_1000 -> {
+                val startPoint = Location("locationA")
+                startPoint.setLatitude(lastLocation.latitude)
+                startPoint.setLongitude(lastLocation.longitude)
+                mMap.clear()
+
+                var posicao: LatLng
+                Log.d("ponto", pontos.toString())
+                for (ponto in pontos) {
+                    posicao = LatLng(ponto.lat, ponto.lng)
+                    Log.d("ponto", "${posicao}" + "${ponto.id_Users}")
+                    val endPoint = Location("locationA")
+                    endPoint.setLatitude(ponto.lat)
+                    endPoint.setLongitude(ponto.lng)
+                    if (startPoint.distanceTo(endPoint) < 1000) {
+
+                        mMap.addMarker(MarkerOptions()
+                                .position(posicao)
+                                .title(ponto.problema)
+                                .snippet("${ponto.id}" + "_" + "${ponto.problema}" + "_" + "${ponto.lat}" + "_" + "${ponto.lng}" + "_" + "${ponto.id_Users}" + "_" + "${ponto.id_Tipo}" + "_" + "${ponto.id_Users}")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+
+                        )
+                    }
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(posicao))
+                }
+
                 return true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
+    private fun startLocationUpdates(){
+        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            return
+        }
+
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
+    }
+
+
+
+
+    private  fun createLocationRequest(){
+        locationRequest = LocationRequest()
+
+        locationRequest.interval=1000
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+    }
+
+    override fun onPause() {
+        super.onPause()
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+
+
+    public override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
+    }
+
+
 }
 
 

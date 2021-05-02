@@ -1,12 +1,19 @@
 package com.example.giteste
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
+import android.widget.*
+import com.example.giteste.api.EndPoints
+import com.example.giteste.api.Pontos
+import com.example.giteste.api.ServiceBuilder
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class deleteUpdate : AppCompatActivity() {
 
@@ -15,45 +22,97 @@ class deleteUpdate : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delete_update)
 
-
+        val sharedPref: SharedPreferences = getSharedPreferences(
+                getString(R.string.preference_login), Context.MODE_PRIVATE
+        )
         editponto = findViewById(R.id.UpdatePontoEdit)
 
-        var id: String =intent.getStringExtra("Problema")
+        var problema: String =intent.getStringExtra("Problema")
 
-        val editRua = intent.getStringExtra("tudo")
+        val tudo = intent.getStringExtra("Tudo")
+         val tudoaray = tudo!!.split("_").toTypedArray()
+         val id = tudoaray[0].toInt()
+        val id_tipo = tudoaray[5].toInt()
+        val id_user = tudoaray[6].toInt()
 
-        findViewById<EditText>(R.id.UpdatePontoEdit).setText(editRua)
-    }
-    fun blogin(view: View){
-        val button = findViewById<Button>(R.id.DeletePonto)
-
-        button.setOnClickListener{
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
+        val tipoacidente = findViewById<View>(R.id.AcidenteE) as RadioButton
+        val tipoobras = findViewById<View>(R.id.ObrasE) as RadioButton
+        tipoacidente.setOnClickListener{
+             var id_tipo=2
+            Toast.makeText(this, id_tipo.toString(), Toast.LENGTH_SHORT).show()
         }
-    }
-    fun onCheckboxClicked(view: View) {
-        if (view is CheckBox) {
-            val checked: Boolean = view.isChecked
+        tipoobras.setOnClickListener{
+            var id_tipo=1
+            Toast.makeText(this, id_tipo.toString(), Toast.LENGTH_SHORT).show()
+        }
 
-            when (view.id) {
-                R.id.Acidente -> {
-                    if (checked) {
-                        // Put some meat on the sandwich
-                    } else {
-                        // Remove the meat
+        Toast.makeText(this@deleteUpdate, id_tipo.toString(), Toast.LENGTH_SHORT).show()
+
+        findViewById<EditText>(R.id.UpdatePontoEdit).setText(problema)
+
+        val buttondelete = findViewById<Button>(R.id.DeletePonto)
+
+        buttondelete.setOnClickListener{
+            if(id_user == (sharedPref.all[getString(R.string.loginDone)])) {
+                val request = ServiceBuilder.buildService(EndPoints::class.java)
+                Log.d("ads", id.toString())
+                val call = request.delete(id)
+
+                call.enqueue(object : Callback<Pontos> {
+                    override fun onResponse(call: Call<Pontos>, response: Response<Pontos>) {
+
+                        if (response.isSuccessful) {
+                            val c: Pontos = response.body()!!
+
+                            val intent = Intent(this@deleteUpdate, MapsActivity::class.java)
+                            startActivity(intent)
+                        }
                     }
-                }
-                R.id.Obras -> {
-                    if (checked) {
-                        // Cheese me
-                    } else {
-                        // I'm lactose intolerant
+
+                    override fun onFailure(call: Call<Pontos>, t: Throwable) {
+                        Toast.makeText(this@deleteUpdate, "FAil", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@deleteUpdate, MapsActivity::class.java)
+                        startActivity(intent)
                     }
-                }
-                // TODO: Veggie sandwich
+
+                })
+            } else{
+                Toast.makeText(this@deleteUpdate, "Não possui premissões para esta operação", Toast.LENGTH_SHORT).show()
+            }
+        }
+        val buttonupdate = findViewById<Button>(R.id.UpdatePonto)
+
+        buttonupdate.setOnClickListener{
+            if(id_user == (sharedPref.all[getString(R.string.loginDone)])) {
+                val request = ServiceBuilder.buildService(EndPoints::class.java)
+                Log.d("ads", "ad")
+                val call = request.update(id, editponto.text.toString(), 2)
+
+                call.enqueue(object : Callback<Pontos> {
+                    override fun onResponse(call: Call<Pontos>, response: Response<Pontos>) {
+
+                        if (response.isSuccessful) {
+                            val c: Pontos = response.body()!!
+
+                            val intent = Intent(this@deleteUpdate, MapsActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Pontos>, t: Throwable) {
+                        Toast.makeText(this@deleteUpdate, "FAil", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@deleteUpdate, MapsActivity::class.java)
+                        startActivity(intent)
+                    }
+
+                })
+            }else{
+                Toast.makeText(this@deleteUpdate, "Não possui premissões para esta operação", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+
+
 
 }

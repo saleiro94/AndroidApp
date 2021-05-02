@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.giteste.api.EndPoints
@@ -52,6 +54,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
         val fabponto = findViewById<FloatingActionButton>(R.id.floatingAction)
         fabponto.setOnClickListener {
@@ -94,21 +97,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     for (ponto in pontos) {
                         posicao = LatLng(ponto.lat, ponto.lng)
                         Log.d("ponto", "${posicao}" + "${ponto.id_Users}" + sharedPref.all[getString(R.string.loginDone)])
-                        //se o id_Utilizador do ponto for igual ao id do login(SharedPreferences
+
                         if (ponto.id_Users.toString() == (sharedPref.all[getString(R.string.loginDone)])) {
 
                             mMap.addMarker(MarkerOptions()
                                     .position(posicao)
                                     .title(ponto.problema)
-                                    .snippet("${ponto.id}"+ "${ponto.problema}" + "${ponto.lat}"+ "${ponto.lng}"+ "${ponto.id_Users}"+ "${ponto.id_Tipo}"+ sharedPref.all[getString(R.string.loginDone)])
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                                    .snippet("${ponto.id}"+"_"+ "${ponto.problema}" +"_"+ "${ponto.lat}"+"_"+ "${ponto.lng}"+"_"+ "${ponto.id_Users}"+"_"+ "${ponto.id_Tipo}"+"_"+"${ponto.id_Users}")
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+
                             )
                         } else {
                             mMap.addMarker(
                                     MarkerOptions()
                                             .position(posicao)
                                             .title(ponto.problema)
-                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                                            .snippet("${ponto.id}"+"_"+ "${ponto.problema}" +"_"+ "${ponto.lat}"+"_"+ "${ponto.lng}"+"_"+ "${ponto.id_Users}"+"_"+ "${ponto.id_Tipo}"+"_"+"${ponto.id_Users}")
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
 
                             )
                         }
@@ -126,16 +131,80 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.setOnInfoWindowClickListener { marker ->
             val intent = Intent(this, deleteUpdate::class.java).apply{
                putExtra("Problema", marker.title)
-               putExtra("tudo", marker.snippet)
+               putExtra("Tudo", marker.snippet)
                 putExtra("Posicao", marker.position)
            }
             startActivity(intent)
+
         }
 
 
 
+        }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_maps, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_acidentes -> {
+                mMap.clear()
+
+                var posicao :LatLng
+                    Log.d("ponto", pontos.toString())
+                    for (ponto in pontos) {
+                        posicao = LatLng(ponto.lat, ponto.lng)
+                        Log.d("ponto", "${posicao}" + "${ponto.id_Users}")
+
+                        if (ponto.id_Tipo == 2) {
+
+                            mMap.addMarker(MarkerOptions()
+                                    .position(posicao)
+                                    .title(ponto.problema)
+                                    .snippet("${ponto.id}"+"_"+ "${ponto.problema}" +"_"+ "${ponto.lat}"+"_"+ "${ponto.lng}"+"_"+ "${ponto.id_Users}"+"_"+ "${ponto.id_Tipo}"+"_"+"${ponto.id_Users}")
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+
+                            )
+                        }
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(posicao))
+                    }
+                Toast.makeText(applicationContext, "click on setting", Toast.LENGTH_LONG).show()
+                return true
+            }
+            R.id.action_obras->{
+                mMap.clear()
+
+                var posicao :LatLng
+                Log.d("ponto", pontos.toString())
+                for (ponto in pontos) {
+                    posicao = LatLng(ponto.lat, ponto.lng)
+                    Log.d("ponto", "${posicao}" + "${ponto.id_Users}")
+
+                    if (ponto.id_Tipo == 1) {
+
+                        mMap.addMarker(MarkerOptions()
+                                .position(posicao)
+                                .title(ponto.problema)
+                                .snippet("${ponto.id}"+"_"+ "${ponto.problema}" +"_"+ "${ponto.lat}"+"_"+ "${ponto.lng}"+"_"+ "${ponto.id_Users}"+"_"+ "${ponto.id_Tipo}"+"_"+"${ponto.id_Users}")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+
+                        )
+                    }
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(posicao))
+                }
+                Toast.makeText(applicationContext, "click on share", Toast.LENGTH_LONG).show()
+                return true
+            }
+            R.id.app_bar_search ->{
+                Toast.makeText(applicationContext, "click on exit", Toast.LENGTH_LONG).show()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
+}
 
 
 

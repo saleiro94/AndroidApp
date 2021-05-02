@@ -20,26 +20,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.745" />
 
-    <CheckBox
-        android:id="@+id/Acidente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Acidente"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389" />
 
-    <CheckBox
-        android:id="@+id/Obras"
+    <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Obras"
         app:layout_constraintBottom_toTopOf="@+id/UpdatePonto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+        app:layout_constraintTop_toBottomOf="@+id/UpdatePontoEdit">
+
+        <RadioButton
+            android:id="@+id/AcidenteE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Acidente" />
+
+        <RadioButton
+            android:id="@+id/ObrasE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Obras" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/UpdatePonto"

@@ -13,21 +13,9 @@
         android:text="@string/Problema"
         app:layout_constraintBottom_toTopOf="@+id/Novoponto"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.711" />
-
-    <EditText
-        android:id="@+id/tipoproblema"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="tipoproblema"
-        app:layout_constraintBottom_toTopOf="@+id/Novoponto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.876" />
+        app:layout_constraintVertical_bias="0.337" />
 
     <Button
         android:id="@+id/Novoponto"
@@ -38,5 +26,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.54" />
+        app:layout_constraintVertical_bias="0.737" />
+
+    <RadioGroup
+        android:layout_width="134dp"
+        android:layout_height="251dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/obrasN"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:layout_marginBottom="104dp"
+            android:text="Obras" />
+
+        <RadioButton
+            android:id="@+id/AcidenteN"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:text="Accidentes" />
+    </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

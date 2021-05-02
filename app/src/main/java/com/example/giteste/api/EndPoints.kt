@@ -15,4 +15,11 @@ interface EndPoints {
     @FormUrlEncoded
     @POST("/myslim/novoponto")
     fun postNovoPonto(@Field("problema") problema: String,@Field("lat") lat: Double,@Field("lng") lng: Double,@Field("id_Users") id_Users: Int,@Field("id_Tipo") id_Tipo: Int): Call<Pontos>
+    @FormUrlEncoded
+    @POST("/myslim/delete")
+    fun delete(@Field("id") id: Int): Call<Pontos>
+    @FormUrlEncoded
+    @POST("/myslim/update")
+    fun update(@Field("id") id: Int,@Field("problema") problema: String,@Field("id_Tipo") id_Tipo: Int): Call<Pontos>
+
 }

@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
 
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {
-//asdasdasd
+//sdfsdf
         return
     }
 
